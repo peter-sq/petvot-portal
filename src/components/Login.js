@@ -10,6 +10,7 @@ import share from '../assets/share.mp4';
 const Login = () => {
 
     const responseGoogle = (response) => {
+          console.log(response)
 
     }
   return (
@@ -24,8 +25,9 @@ const Login = () => {
             </div>
             <div className='shadow-2xl'>
                 <GoogleLogin
-                clientId=''
+                clientId={process.env.REACT_APP_GOOGLE_API_TOKEN}
                 render={(renderprops) => (
+                  
                     <button
                     typeof='button'
                     className='bg-mainColor flex justify-center items-center p-3 rounded-lg cursor-pointer outline-none'
