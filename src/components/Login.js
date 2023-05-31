@@ -1,5 +1,6 @@
 import React from 'react';
-import GoogleLogin from 'react-google-login';
+import { GoogleLogin } from '@react-oauth/google';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import {useNavigate} from 'react-router-dom';
 import {fcGoogle} from 'react-icons/fc';
 import favicon from '../assets/favicon.png';
@@ -14,6 +15,7 @@ const Login = () => {
 
     }
   return (
+    <GoogleOAuthProvider clientId= {`${process.env.REACT_APP_GOOGLE_API_TOKEN}`} >
     <div className='flex justify-start items-center flex-col h-screen'>
         <div className='relative w-full h-full'>
            <video src = {share} type = "video/mp4" loop controls = {false} muted autoPlay
@@ -25,7 +27,7 @@ const Login = () => {
             </div>
             <div className='shadow-2xl'>
                 <GoogleLogin
-                clientId={process.env.REACT_APP_GOOGLE_API_TOKEN}
+                // clientId={process.env.REACT_APP_GOOGLE_API_TOKEN}
                 render={(renderprops) => (
                   
                     <button
@@ -37,14 +39,19 @@ const Login = () => {
                         <fcGoogle className = "mr-4"/> sign in with google 
                     </button>
                 )}
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
+                onSuccess={credentialResponse => {
+                    console.log(credentialResponse);
+                  }}
+                  onError={() => {
+                    console.log('Login Failed');
+                  }}
                 cookiePolicy='single_host_origin'
                 />
             </div>
         </div>
 
     </div>
+    </GoogleOAuthProvider>
   )
 }
 
