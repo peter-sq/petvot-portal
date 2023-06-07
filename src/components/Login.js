@@ -17,16 +17,19 @@ const Login = () => {
     const responseGoogle = (response) => {
          localStorage.setItem('user', JSON.stringify(response.profileObj));
          var decodedHeader = jwt_decode(response.credential);
-         const { name, sub, imageUrl } = decodedHeader;
+
+       
+         const { name, sub, picture } = decodedHeader;
 
          //schema database
          const doc = {
             _id: sub,
             _type: 'user',
-            name: name,
-            image: imageUrl
+            userName: name,
+            image: picture
          }
-         
+
+         console.log(doc);
 
          //check if value exist on database 
          client.createIfNotExists(doc)
