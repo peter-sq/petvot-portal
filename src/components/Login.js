@@ -29,7 +29,7 @@ const Login = () => {
             image: picture
          }
 
-         console.log(doc);
+         console.log(doc._id);
 
          //check if value exist on database 
          client.createIfNotExists(doc)
